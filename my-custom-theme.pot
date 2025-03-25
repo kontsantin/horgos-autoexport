@@ -1,0 +1,396 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Custom Cars\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-12-11 21:32+0000\n"
+"PO-Revision-Date: 2024-12-12 00:56+0000\n"
+"Last-Translator: \n"
+"Language-Team: English (UK)\n"
+"Language: en_GB\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.14; wp-6.7.1\n"
+"X-Domain: my-custom-theme"
+
+#: footer.php:46
+msgid "+8618154983097"
+msgstr ""
+
+#. Name of the template
+#: about-page.php:2
+msgid "About Page"
+msgstr ""
+
+#. Name of the template
+#: catalogs.php:2
+msgid "Catalog"
+msgstr ""
+
+#. Name of the template
+#: page-contact.php:2
+msgid "Contact Page"
+msgstr ""
+
+#. Name of the theme
+msgid "Custom Cars"
+msgstr ""
+
+#. Description of the theme
+msgid "Custom theme based on HTML template."
+msgstr ""
+
+#. Name of the template
+#: faq-page.php:2
+msgid "FAQ Page"
+msgstr ""
+
+#. Name of the template
+#: home-page.php:2
+msgid "Home Page"
+msgstr ""
+
+#. URI of the theme
+#. Author URI of the theme
+msgid "https://t.me/murzilka300"
+msgstr ""
+
+#: footer.php:50
+msgid "info@horgos-autoexport.com"
+msgstr ""
+
+#: footer.php:60
+msgid ""
+"Intersection of Lianhuo Expressway and S213, Khorgos City, Xinjiang, China"
+msgstr ""
+
+#. Name of the template
+#: news-page.php:2
+msgid "News Page"
+msgstr ""
+
+#. Author of the theme
+msgid "Nikolay Zhidkov"
+msgstr ""
+
+#: footer.php:56
+msgid "Адрес"
+msgstr "Address"
+
+#: index.php:17
+msgid "Записей не найдено."
+msgstr "No entries found."
+
+#: footer.php:16
+msgid "Каталог"
+msgstr "Catalog"
+
+#: footer.php:42
+msgid "Контакты"
+msgstr "Contacts"
+
+#: footer.php:27
+msgid "О нас"
+msgstr "About Us"
+
+#: single-catalog.php:22
+msgid "Галерея отсутствует"
+msgstr "No gallery"
+
+#: single-catalog.php:61
+msgid "Двигатель:"
+msgstr "Engine:"
+
+#: single-catalog.php:65
+msgid "Мощность:"
+msgstr "Power:"
+
+#: single-catalog.php:69
+msgid "Расход топлива:"
+msgstr "Fuel consumption:"
+
+#: single-catalog.php:73
+msgid "Привод:"
+msgstr "Drive:"
+
+#: single-catalog.php:77
+msgid "Размеры (Длина/Ширина/Высота):"
+msgstr "Dimensions (Length/Width/Height):"
+
+#: single-catalog.php:97
+msgid "от"
+msgstr "from"
+
+#: single-catalog.php:100
+msgid "Нет преимуществ"
+msgstr "No benefits"
+
+#: single-catalog.php:110
+msgid "Запросить цену"
+msgstr "Request a price"
+
+#: single-catalog.php:118
+msgid "другие модели"
+msgstr "other models"
+
+#: single-catalog.php:169
+msgid "Нет записей в этом бренде"
+msgstr "There are no entries in this brand"
+
+#: single-catalog.php:171
+msgid "Бренд не найден"
+msgstr "Brand not found"
+
+#: single-catalog.php:193
+msgid "Ваше имя"
+msgstr "your name"
+
+#: single-catalog.php:200
+msgid "Страна/Город"
+msgstr "Country/City"
+
+#: single-catalog.php:207
+msgid "Номер Whatsapp"
+msgstr "Whatsapp number"
+
+#: single-catalog.php:211
+msgid "Ваш вопрос"
+msgstr "Your question"
+
+#: single-catalog.php:215
+msgid "Ваш запрос принят!"
+msgstr "Your request has been accepted!"
+
+
+#: taxonomy-brands.php:231
+msgid "Поиск по каталогу"
+msgstr "Catalog Search"
+
+#: taxonomy-brands.php:109
+msgid "Поиск по каталогу"
+msgstr "Catalog Search"
+
+
+#: home-page.php:449
+msgid "Ваше имя"
+msgstr "name"
+
+#: home-page.php:460
+msgid "Оценка (1-5)"
+msgstr "Rating (1-5)"
+
+
+#: home-page.php:471
+msgid "Ваш отзыв"
+msgstr "Your review"
+
+#: home-page.php:481
+msgid "Ваш Email"
+msgstr "Your Email"
+
+#: home-page.php:486
+msgid "Отправить отзыв"
+msgstr "Send feedback"
+
+
+#: home-page.php:403
+msgid "Ваше имя"
+msgstr "Name"
+
+#: home-page.php
+msgid "подробнее"
+msgstr "Name"
+
+#: home-page.php:414
+msgid "Страна/Город"
+msgstr "Country/City"
+
+#: home-page.php:425
+msgid "Номер Whatsapp"
+msgstr "Number Whatsapp"
+
+#: home-page.php:431
+msgid "Ваш вопрос"
+msgstr "Your question"
+
+
+#: home-page.php:436
+msgid "Задать вопрос"
+msgstr "Ask a question"
+
+
+
+
+
+
+
+#: faq-page.php:58
+msgid "Ваше имя"
+msgstr "Name"
+
+#: faq-page.php:68
+msgid "Страна/Город"
+msgstr "Country/City"
+
+#: faq-page.php:78
+msgid "Номер Whatsapp"
+msgstr "Number Whatsapp"
+
+#: faq-page.php:83
+msgid "Ваш вопрос"
+msgstr "Your question"
+
+#: faq-page.php:88
+msgid "Запросить цену"
+msgstr "Request a price"
+
+
+
+#: news-page.php:146
+msgid "<< Назад"
+msgstr "<< Prev"
+
+#: news-page.php:147
+msgid "Далее >>"
+msgstr "Next >>"
+
+
+#: news-page.php:147
+msgid "Подробнее"
+msgstr "More"
+
+#: news-page.php:123
+msgid "Подробнее"
+msgstr "More"
+
+
+
+
+#: about-page
+msgid "Имя"
+msgstr "Name"
+
+#: about-page
+msgid "Email"
+msgstr "Email"
+
+#: about-page
+msgid "Whatsapp"
+msgstr "Whatsapp"
+
+#: about-page
+msgid "Страна"
+msgstr "Country"
+
+#: about-page
+msgid "Задайте вопрос по модели или комплектации."
+msgstr "Ask a question about the model or configuration."
+
+#: about-page
+msgid "Отправить"
+msgstr "Send"
+
+
+
+#: page-contact
+msgid "Имя"
+msgstr "Name"
+
+#: page-contact
+msgid "Email"
+msgstr "Email"
+
+#: page-contact
+msgid "Whatsapp"
+msgstr "Whatsapp"
+
+#: page-contact
+msgid "Страна"
+msgstr "Country"
+
+#: page-contact
+msgid "Задайте вопрос по модели или комплектации."
+msgstr "Ask a question about the model or configuration."
+
+#: page-contact
+msgid "Отправить"
+msgstr "Send"
+
+
+
+
+
+
+#: single-catalog
+msgid "Ваше имя"
+msgstr "Your Name"
+
+#: single-catalog
+msgid "Имя должно содержать только буквы"
+msgstr "The name must contain only letters"
+
+#: single-catalog
+msgid "Страна/Город"
+msgstr "Country/City"
+
+#: single-catalog
+msgid "Название города или страны должно содержать только буквы"
+msgstr "The city or country name must contain only letters"
+
+#: single-catalog
+msgid "Номер Whatsapp"
+msgstr "Whatsapp Number"
+
+#: single-catalog
+msgid "Ваш вопрос"
+msgstr "Your Question"
+
+#: single-catalog
+msgid "Запросить цену"
+msgstr "Request Price"
+
+
+#: taxonomy-brands
+msgid "Каталог"
+msgstr "Catalog"
+
+#: taxonomy-brands
+msgid "Поиск"
+msgstr "Search"
+
+#: catalogs
+msgid "Поиск"
+msgstr "Search"
+
+
+
+
+#: 404.php
+msgid "Ошибка 404"
+msgstr "Error 404"
+
+#: 404.php
+msgid "К сожалению, страница, которую вы ищете, не найдена."
+msgstr "Unfortunately, the page you are looking for cannot be found."
+
+#: 404.php
+msgid "Вернуться на главную"
+msgstr "Return to Home"
+
+
+
+#: thank-you.php
+msgid "Спасибо за Ваше обращение!"
+msgstr "Thank you for your message!"
+
+#: thank-you.php
+msgid "Мы свяжемся с вами в ближайшее время."
+msgstr "We will contact you shortly."
+
+#: thank-you.php
+msgid "Вернуться на главную"
+msgstr "We will contact you as soon as possible"
+
+
