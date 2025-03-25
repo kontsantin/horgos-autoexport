@@ -86,45 +86,55 @@ add_action('wp_ajax_nopriv_submit_review_form', 'submit_review_form');
 
 
 
+// Обработчик для новой формы
 function handle_custom_form_submission() {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'submit_custom_form') {
-        // Санитизация данных
-        $name = sanitize_text_field($_POST['name'] ?? '');
-        $email = sanitize_email($_POST['email'] ?? '');
-        $whatsapp = sanitize_text_field($_POST['whatsapp'] ?? '');
-        $country = sanitize_text_field($_POST['country'] ?? '');
-        $question = sanitize_textarea_field($_POST['question'] ?? '');
-        $current_page = esc_url_raw($_POST['current_page'] ?? '');
-
-        // Создание нового поста с данными формы
-        $post_id = wp_insert_post([
-            'post_type' => 'custom_form_request',  // Ваш кастомный тип записи
-            'post_title' => "Заявка от $name",
-            'post_content' => $question,
-            'post_status' => 'publish',
-        ]);
-
-        if ($post_id) {
-            // Сохранение дополнительных мета-данных
-            update_post_meta($post_id, 'email', $email);
-            update_post_meta($post_id, 'whatsapp', $whatsapp);
-            update_post_meta($post_id, 'country', $country);
-            update_post_meta($post_id, 'current_page', $current_page);
-        }
-
-        // Возврат успешного ответа в формате JSON
-        echo json_encode([
-            'status' => 'success',
-            'message' => 'Спасибо за вашу заявку, мы с вами свяжемся!',
-        ]);
-    } else {
-        echo json_encode([
-            'status' => 'error',
-            'message' => 'Ошибка при отправке формы',
-        ]);
+    global $wpdb;
+    
+    // Проверяем nonce
+    if (!isset($_POST['custom_form_nonce']) || !wp_verify_nonce($_POST['custom_form_nonce'], 'custom_form_action')) {
+        wp_send_json_error('Ошибка безопасности');
+        return;
     }
-
-    wp_die();  // Останавливает дальнейшую обработку
+    
+    $table_name = $wpdb->prefix . 'new_form';
+    
+    // Проверяем существование таблицы
+    if ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
+        // Логируем ошибку
+        error_log("Table $table_name doesn't exist");
+        wp_send_json_error('Системная ошибка. Пожалуйста, попробуйте позже.');
+        return;
+    }
+    
+    // Очищаем и валидируем данные
+    $data = [
+        'name' => sanitize_text_field($_POST['name'] ?? ''),
+        'email' => sanitize_email($_POST['email'] ?? ''),
+        'whatsapp' => sanitize_text_field($_POST['whatsapp'] ?? ''),
+        'country' => sanitize_text_field($_POST['country'] ?? ''),
+        'question' => sanitize_textarea_field($_POST['question'] ?? ''),
+        'current_page' => esc_url_raw($_POST['current_page'] ?? '')
+    ];
+    
+    // Проверка обязательных полей
+    if (empty($data['name'])) {
+        wp_send_json_error('Пожалуйста, укажите ваше имя');
+        return;
+    }
+    
+    // Добавляем запись в базу данных
+    $result = $wpdb->insert(
+        $table_name,
+        $data,
+        ['%s', '%s', '%s', '%s', '%s', '%s']
+    );
+    
+    if ($result === false) {
+        error_log('DB Error: ' . $wpdb->last_error);
+        wp_send_json_error('Ошибка при сохранении данных');
+    } else {
+        wp_send_json_success('Спасибо за вашу заявку! Мы свяжемся с вами в ближайшее время.');
+    }
 }
 add_action('wp_ajax_submit_custom_form', 'handle_custom_form_submission');
-add_action('wp_ajax_nopriv_submit_custom_form', 'handle_custom_form_submission');  // Для неавторизованных пользователей
+add_action('wp_ajax_nopriv_submit_custom_form', 'handle_custom_form_submission');

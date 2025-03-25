@@ -5,7 +5,7 @@ function create_feedback_tables() {
     global $wpdb;
     $table_name_feedback = $wpdb->prefix . 'feedback_form';
     $table_name_reviews = $wpdb->prefix . 'reviews_form';
-    $table_name_new_form = $wpdb->prefix . 'new_form';
+    $table_name = $wpdb->prefix . 'custom_form_submissions';
     // Добавляем столбец для времени создания, если он не существует
     $wpdb->query("ALTER TABLE $table_name_feedback ADD COLUMN IF NOT EXISTS created_at datetime DEFAULT CURRENT_TIMESTAMP;");
     $wpdb->query("ALTER TABLE $table_name_reviews ADD COLUMN IF NOT EXISTS created_at datetime DEFAULT CURRENT_TIMESTAMP;");
@@ -36,14 +36,18 @@ function create_feedback_tables() {
         PRIMARY KEY (id)
     )
      $charset_collate;";
-        // Создание таблицы для новой формы
-        $sql_new_form = "CREATE TABLE $table_name_new_form (
-            id mediumint(9) NOT NULL AUTO_INCREMENT,
-            name varchar(255) NOT NULL,
-            message text NOT NULL,
-            created_at datetime DEFAULT CURRENT_TIMESTAMP,
-            PRIMARY KEY (id)
-        ) $charset_collate;";
+        // Исправленный SQL для таблицы new_form
+    $sql_new_form = "CREATE TABLE IF NOT EXISTS $table_name (
+        id INT(11) NOT NULL AUTO_INCREMENT,
+        name VARCHAR(255) NOT NULL,
+        email VARCHAR(255),
+        whatsapp VARCHAR(255),
+        country VARCHAR(255),
+        question TEXT,
+        current_page TEXT,
+        submitted_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY (id)
+    ) $charset_collate;";
     
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     dbDelta($sql_feedback);
@@ -340,26 +344,50 @@ add_action('admin_post_clear_feedback_reviews', 'clear_feedback_reviews');
 function feedback_new_form_page() {
     global $wpdb;
     $table_name = $wpdb->prefix . 'new_form';
-    $results = $wpdb->get_results("SELECT * FROM $table_name");
+    
+    // Проверяем существование таблицы
+    if ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
+        echo '<div class="notice notice-error"><p>Таблица для новой формы не существует!</p></div>';
+        return;
+    }
+    
+    $results = $wpdb->get_results("SELECT * FROM $table_name ORDER BY submitted_at DESC");
     ?>
     <div class="wrap">
-        <h1>Новая форма</h1>
+        <h1>Заявки из новой формы</h1>
         <table class="wp-list-table widefat fixed striped">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Имя</th>
-                    <th>Сообщение</th>
+                    <th>Email</th>
+                    <th>WhatsApp</th>
+                    <th>Страна</th>
+                    <th>Вопрос</th>
+                    <th>Страница</th>
                     <th>Дата</th>
+                    <th>Действия</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($results as $row) : ?>
                     <tr>
                         <td><?php echo $row->id; ?></td>
-                        <td><?php echo $row->name; ?></td>
-                        <td><?php echo $row->message; ?></td>
-                        <td><?php echo $row->created_at; ?></td>
+                        <td><?php echo esc_html($row->name); ?></td>
+                        <td><?php echo esc_html($row->email); ?></td>
+                        <td><?php echo esc_html($row->whatsapp); ?></td>
+                        <td><?php echo esc_html($row->country); ?></td>
+                        <td><?php echo esc_html($row->question); ?></td>
+                        <td><?php echo esc_url($row->current_page); ?></td>
+                        <td><?php echo $row->submitted_at; ?></td>
+                        <td>
+                            <form method="post" action="<?php echo admin_url('admin-post.php'); ?>">
+                                <input type="hidden" name="action" value="delete_new_form_entry">
+                                <input type="hidden" name="entry_id" value="<?php echo $row->id; ?>">
+                                <?php wp_nonce_field('delete_new_form_entry_' . $row->id); ?>
+                                <?php submit_button('Удалить', 'delete', 'submit', false); ?>
+                            </form>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -367,4 +395,19 @@ function feedback_new_form_page() {
     </div>
     <?php
 }
+
+// Обработчик удаления записи
+function delete_new_form_entry() {
+    if (!isset($_POST['entry_id']) || !wp_verify_nonce($_POST['_wpnonce'], 'delete_new_form_entry_' . $_POST['entry_id'])) {
+        wp_die('Ошибка безопасности');
+    }
+    
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'new_form';
+    $wpdb->delete($table_name, ['id' => intval($_POST['entry_id'])]);
+    
+    wp_redirect(admin_url('admin.php?page=feedback-new-form'));
+    exit;
+}
+add_action('admin_post_delete_new_form_entry', 'delete_new_form_entry');
 

@@ -98,37 +98,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (form) {
         form.addEventListener('submit', function (e) {
-            e.preventDefault();  // Отменяем стандартное отправление формы
+            e.preventDefault();
 
-            const url = ajax_object.ajax_url;
+            // Собираем данные формы
             const formData = new FormData(form);
+            formData.append('action', 'submit_custom_form');
 
-            fetch(url, {
+            fetch(ajax_object.ajax_url, {
                 method: 'POST',
-                body: formData,
+                body: formData
             })
-            .then(response => response.text())
-            .then(text => {
-                console.log('Ответ сервера:', text);
-                try {
-                    const data = JSON.parse(text);
-                    if (data.status === 'success') {
-                        // Показываем успешное сообщение
-                        alert('Форма успешно отправлена!');
-                        form.reset();  // Очищаем форму после отправки
-                    } else {
-                        alert(data.message || 'Ошибка при отправке формы');
-                    }
-                } catch (e) {
-                    console.error('Ошибка при парсинге JSON:', e);
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.data);
+                    form.reset();
+                } else {
+                    alert(data.data || 'Ошибка при отправке формы');
                 }
             })
             .catch(error => {
-                console.error('Ошибка при выполнении запроса:', error);
+                console.error('Ошибка:', error);
+                alert('Произошла ошибка при отправке формы');
             });
         });
-    } else {
-        console.error('Форма с ID "custom-form" не найдена!');
     }
 });
-

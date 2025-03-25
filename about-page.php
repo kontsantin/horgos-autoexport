@@ -141,12 +141,10 @@ get_header(); // Подключаем шапку
             <?php echo esc_html(get_field('text_31')); ?>
         </p>
         <div class="form-container">
+            
             <form id="custom-form">
-                <!-- Скрытое поле для определения действия -->
+            <input type="hidden" name="custom_form_nonce" value="<?php echo wp_create_nonce('custom_form_action'); ?>">
                 <input type="hidden" name="action" value="submit_custom_form">
-
-                <!-- Скрытое поле для передачи текущей страницы -->
-                <input type="hidden" name="current_page" value="<?php echo esc_url(get_permalink()); ?>">
 
                 <div class="form-grid">
                     <div>

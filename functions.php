@@ -7,7 +7,7 @@
 // // Подключаем файл feedback-modal.php
 require_once get_template_directory() . '/inc/admin-forms.php';
 require_once get_template_directory() . '/inc/form-handler.php';
-
+require_once get_template_directory() . '/inc/form-handler-new.php';
 
 function my_theme_setup() {
     add_theme_support('post-thumbnails'); // Включает поддержку миниатюр
